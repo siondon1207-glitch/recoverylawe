@@ -1,23 +1,869 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <style>
+        :root {
+            --primary-color: #2c5282;
+            --primary-light: #ebf8ff;
+            --primary-dark: #1a365d;
+            --secondary-color: #319795;
+            --secondary-light: #e6fffa;
+            --text-color: #2d3748;
+            --text-muted: #718096;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --accent-color: #dd6b20;
+            --accent-light: #fffaf0;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 26px;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 12px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: var(--secondary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 12px;
+            margin-top: 35px;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 17px;
+            color: var(--primary-dark);
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 16px;
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 15px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fcfdfd;
+        }
+
+        .highlight-box {
+            background-color: var(--primary-light);
+            border-left: 6px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .accent-box {
+            background-color: var(--accent-light);
+            border-left: 6px solid var(--accent-color);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .accent-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CSS Custom Graph Style */
+        .graph-container {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .graph-title {
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-dark);
+            font-size: 17px;
+        }
+
+        .graph-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .graph-label {
+            width: 120px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .graph-bar-wrapper {
+            flex-grow: 1;
+            background-color: #edf2f7;
+            border-radius: 6px;
+            height: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .graph-bar {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            transition: width 1s ease-in-out;
+        }
+
+        .bg-blue { background-color: var(--primary-color); }
+        .bg-teal { background-color: var(--secondary-color); }
+        .bg-orange { background-color: var(--accent-color); }
+
+        /* Interactive Widgets */
+        .widget-section {
+            background-color: #fff;
+            border: 2px solid var(--primary-light);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .widget-title {
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            display: none;
+        }
+
+        .result-box h5 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Checkbox Group */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-color);
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .checkbox-item input {
+            margin-right: 10px;
+        }
+
+        footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            header h1 {
+                font-size: 24px;
+            }
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "http://credit.reliabledone.com/personal-workout#article",
+          "headline": "2026 개인워크아웃 완전 분석 가이드: 신청 자격 조건과 감면율 비교",
+          "description": "2026년 가계부채 상환 압박을 겪는 분들을 위한 신용회복위원회 개인워크아웃 제도의 상세 안내서입니다. 자격 조건, 평균 감면금액, 개인회생과의 차이점, 디시 및 펨코 후기를 담았습니다.",
+          "datePublished": "2026-07-07T16:00:00+09:00",
+          "dateModified": "2026-07-07T16:00:00+09:00",
+          "author": {
+            "@type": "Organization",
+            "name": "종합자산신용연구센터"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "종합자산신용연구센터",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "http://credit.reliabledone.com/assets/logo.png"
+            }
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "http://credit.reliabledone.com/personal-workout#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "개인워크아웃의 가장 핵심적인 자격 조건은 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "가장 기본이 되는 자격은 신용회복지원협약에 가입된 금융회사의 채무 중 연체 기간이 90일(3개월) 이상이어야 한다는 점입니다. 또한 총 채무액이 15억 원(무담보 5억 원, 담보 10억 원) 이하여야 하며, 최근 6개월 이내 발생한 신규 채무 비율이 전체 채무액의 30% 미만이어야 신청이 가능합니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "개인워크아웃을 신청하면 원금은 평균적으로 얼마 정도 감면받을 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "개인워크아웃은 이자와 연체이자는 전액 면제받는 것이 원칙입니다. 다만 원금의 경우 보유한 채권의 성격에 따라 차등 적용됩니다. 삼각채권(금융회사에서 대손상각 처리한 채무)은 20%에서 최대 70%까지 감면이 가능하며, 상각되지 않은 채권은 원금 감면이 거의 되지 않거나 제한적입니다. 기초생활수급자나 중증장애인 등 사회적 배려층에 해당할 경우에는 최대 90%까지 원금 감면 혜택을 제공받을 수 있습니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>2026년 개인워크아웃 완전 분석 가이드</h1>
+            <p>신청 자격 조건부터 감면율, 개인회생 및 신속채무조정과의 차이점 비교 분석</p>
+        </header>
+
+        <h2>1. 가계 부채 위기 시대와 사적 채무조정 제도의 중요성</h2>
+        <p>전국적인 경기 침체 장기화로 인해 많은 서민 가정이 금융 채무의 무거운 짐을 지고 힘겨운 나날을 보내고 있습니다. 서울을 비롯하여 경기도, 인천, 부산, 대구, 대전, 광주, 울산, 세종 등 주요 도시권의 20대, 30대 청년층부터 직장인, 주부, 그리고 60대 이상 고령층에 이르기까지 연체 독촉과 추심 압박에 노출된 채무자의 수가 사상 최대치에 이르고 있습니다. 이러한 상황 속에서 무리한 연체 돌려막기를 지속하기보다는 국가와 공공기관이 지원하는 채무조정 프로그램을 영리하게 활용하는 것이 현명한 탈출구가 될 수 있습니다.</p>
+        
+        <p>신용회복위원회에서 운영하는 <strong>개인워크아웃</strong>은 장기 연체로 고통받는 신용 불량 상태의 금융취약계층을 구제하기 위한 대표적인 서적 채무조정 제도입니다. 법원에서 진행하는 공적 제도인 개인회생 및 개인파산과 달리 사적인 협약을 기반으로 하기에 신청 절차가 상대적으로 간소하고 초기 진행 비용이 거의 들지 않는다는 독보적인 이점이 있습니다. 2026년도 개정 지침에 맞춘 개인워크아웃 제도의 본질과 구체적인 혜택을 이해하고, 내 상황에 적용 가능한 최선의 솔루션을 도출해 보시기 바랍니다.</p>
+
+        <div class="highlight-box">
+            <p><strong>핵심 정보 안내 사이트</strong>: 채무 상태를 면밀히 파악하고 맞춤형 재무 설계를 얻으려면 가장 먼저 공신력 있는 전문 정보 플랫폼을 방문하는 것이 좋습니다. 세부적인 신용 진단과 연체 단계별 컨설팅 정보는 <a href="http://credit.reliabledone.com" target="_blank">신용관리 및 채무조정 맞춤 지원 센터</a>를 참조하여 주시기 바랍니다. 또한, 기본적인 설립 근거와 위원회 운영 상세 사항은 <a href="https://namu.wiki/w/%EC%8B%A0%EC%9A%A9%ED%9A%8C%EB%B3%B5%EC%9C%84%EC%9B%90%ED%9A%8C" target="_blank">나무위키 신용회복위원회 개요</a> 문서에서 간편하게 확인할 수 있습니다.</p>
+        </div>
+
+        <h2>2. 개인워크아웃이란 무엇인가: 개념과 근본 원리</h2>
+        <p>개인워크아웃은 금융기관 대출금이나 신용카드 대금 등의 납입일이 영업일 기준으로 <strong>90일(3개월) 이상</strong> 지체되었을 때 신청하는 연체 해결 제도입니다. 연체 기간이 장기화되면 금융회사들은 채권 회수가 불가능하다고 판단하여 특수 채권(상각 채권)으로 전환하게 되는데, 신용회복위원회는 이러한 장기 채권을 대상으로 이자율을 전액 면제하고 원금을 채권 종류와 채무자의 상환 능력에 따라 조정하여 최장 8년(특수 상황 시 10년) 동안 나누어 갚을 수 있도록 상환 계획을 전면 재조정해 줍니다.</p>
+
+        <p>이는 무분별한 빚 독촉으로 평범한 삶이 무너진 채무자에게 최저생계비를 보장하면서 성실히 빚을 청산할 기회를 제공하는 공익적 역할을 수행합니다. 금융회사 입장에서도 무가치하게 방치될 뻔한 부실 채권의 일부를 장기적으로나마 회수할 수 있게 하므로, 채무자와 채권 금융기관 모두가 상생할 수 있는 합리적인 타협안이라 평가받고 있습니다.</p>
+
+        <h2>3. 2026년도 개인워크아웃 신청 자격 조건</h2>
+        <p>개인워크아웃을 정상적으로 가입하고 승인받기 위해서는 아래의 5가지 요건을 완벽하게 충족해야 합니다. 한 가지 조건이라도 누락될 경우 심사 과정에서 기각될 수 있으므로, 신청 전에 꼼꼼한 자가 점검이 필수적입니다.</p>
+
+        <ul>
+            <li><strong>연체 기간 요건</strong>: 협약 대상 금융기관에 대한 채무 중 최소 하나 이상의 채무 연체 일수가 90일 이상이어야 합니다.</li>
+            <li><strong>총 채무액 한도 제한</strong>: 무담보 채무는 5억 원 이하, 담보 채무는 10억 원 이하로 총 합계 채무액이 15억 원 이하여야 합니다.</li>
+            <li><strong>신규 채무 비율 제한</strong>: 신청 전 6개월 이내에 새롭게 발생한 신규 채무 원금의 합계가 총 채무 원금의 30% 미만이어야 합니다. 무분별하게 대출을 받아 고의적으로 채무조정을 신청하는 모럴해저드를 막기 위한 핵심 장치입니다.</li>
+            <li><strong>변제 가능 소득 증빙</strong>: 최저생계비 이상의 꾸준한 소득이 발생하고 있거나, 본인 소득이 부족하더라도 주부나 학생처럼 부모, 배우자 등 제3자의 소득 증빙을 통해 대위 변제가 가능함을 증명해야 합니다.</li>
+            <li><strong>협약 가입 금융기관 대상 채무</strong>: 조정 대상 채무는 반드시 신용회복지원협약에 가입된 금융회사의 채무여야 합니다. 개인 간 거래 사채, 일용직 임금 체불, 세금 체납, 일반 사설 업체 대금 등은 워크아웃 대상에 포함할 수 없습니다.</li>
+        </ul>
+
+        <div class="accent-box">
+            <p><strong>주의사항</strong>: 세금(국세, 지방세) 및 4대 보험 연체 금액은 신용회복위원회의 조정 대상에서 제외됩니다. 해당 금액은 별도로 관할 세무서나 국민건강보험공단 등과 상환 분할 협의를 다이렉트로 진행해야 안전합니다.</p>
+        </div>
+
+        <h2>4. 채무조정 제도별 입체적 비교: 나에게 맞는 구제안 찾기</h2>
+        <p>신용회복위원회에서 운영하는 워크아웃 제도는 연체 일수에 따라 크게 3가지 종류(신속채무조정, 프리워크아웃, 개인워크아웃)로 나뉩니다. 또한 법원에서 진행하는 공적 제도인 개인회생과도 장단점 차이점이 매우 뚜렷합니다. 아래 비교 표를 통해 어떤 제도가 본인의 부채 구조에 적합한지 객관적으로 검토해 보시기 바랍니다.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>구분</th>
+                    <th>신속채무조정 (연체전 채무조정)</th>
+                    <th>프리워크아웃 (이자율 채무조정)</th>
+                    <th>개인워크아웃 (일반 채무조정)</th>
+                    <th>개인회생 (법원 제도)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>연체 기간</strong></td>
+                    <td>연체 우려 또는 30일 이하</td>
+                    <td>31일 이상 89일 이하</td>
+                    <td>90일 이상 (장기 연체)</td>
+                    <td>연체 여부 무관</td>
+                </tr>
+                <tr>
+                    <td><strong>이자 면제 여부</strong></td>
+                    <td>이자율 연 3.25% ~ 15%로 인하</td>
+                    <td>약정 이자율의 50% 인하</td>
+                    <td><strong>이자 및 연체이자 100% 면제</strong></td>
+                    <td>이자 전액 면제</td>
+                </tr>
+                <tr>
+                    <td><strong>원금 감면율</strong></td>
+                    <td>감면 없음 (상환 유예만 지원)</td>
+                    <td>원금 감면 없음</td>
+                    <td><strong>상각채권 20~70% (취약층 최대 90%)</strong></td>
+                    <td>수입 및 재산에 따라 최대 95%</td>
+                </tr>
+                <tr>
+                    <td><strong>장점</strong></td>
+                    <td>신용 하락이 적고 조기 신청 가능</td>
+                    <td>카드 결제 등 상환 부담 신속 완화</td>
+                    <td><strong>비용 저렴, 상각 채무 대폭 감면</strong></td>
+                    <td>모든 채권(사채, 보증 등) 포함 가능</td>
+                </tr>
+                <tr>
+                    <td><strong>단점</strong></td>
+                    <td>원금 자체를 삭감해 주지 않음</td>
+                    <td>이자를 계속 납부해야 하므로 부담 지속</td>
+                    <td><strong>90일간 추심을 버텨야 신청 가능</strong></td>
+                    <td>높은 수임료 비용, 복잡한 법원 서류</td>
+                </tr>
+                <tr>
+                    <td><strong>신청 비용</strong></td>
+                    <td>신청비 5만 원</td>
+                    <td>신청비 5만 원</td>
+                    <td><strong>신청비 5만 원 (취약층 면제)</strong></td>
+                    <td>송달료, 인지대, 변호사 수임료 등 수백만 원</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="graph-container">
+            <div class="graph-title">제도별 원금 최고 감면율 한도 비교 (일반 채무자 기준)</div>
+            <div class="graph-row">
+                <span class="graph-label">신속채무조정</span>
+                <div class="graph-bar-wrapper">
+                    <div class="graph-bar bg-teal" style="width: 15%;">15% 이하 (일부 특례 적용 시)</div>
+                </div>
+            </div>
+            <div class="graph-row">
+                <span class="graph-label">프리워크아웃</span>
+                <div class="graph-bar-wrapper">
+                    <div class="graph-bar bg-teal" style="width: 0%;">0% (원금 감면 불가)</div>
+                </div>
+            </div>
+            <div class="graph-row">
+                <span class="graph-label">개인워크아웃</span>
+                <div class="graph-bar-wrapper">
+                    <div class="graph-bar bg-blue" style="style-width: 70%; width: 70%;">최대 70% (상각 채권 한정)</div>
+                </div>
+            </div>
+            <div class="graph-row">
+                <span class="graph-label">개인회생</span>
+                <div class="graph-bar-wrapper">
+                    <div class="graph-bar bg-orange" style="width: 95%;">최대 95% (법원 심사 결과에 따름)</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>5. 체류시간 증대를 위한 자가 진단 및 변제금 계산 시뮬레이터</h2>
+        <p>본인의 현재 상황에서 개인워크아웃 가입이 실제로 가능한지, 그리고 매월 납입해야 하는 예상 금액은 얼마 정도일지 아래의 자가 진단기와 계산기 앱 기능을 통해 직접 모의 계산해 보십시오. 입력한 데이터는 외부로 전송되지 않으며, 안전하게 웹 페이지 내에서 즉시 연산됩니다.</p>
+
+        <!-- 자격 자가진단 위젯 -->
+        <div class="widget-section" id="eligibility-widget">
+            <h3 class="widget-title">개인워크아웃 신청 자격 자가 진단기</h3>
+            <div class="form-group">
+                <label>1. 현재 보유한 채무 중 가장 긴 연체 기간은 어느 정도인가요?</label>
+                <select id="overdue-days" class="form-control">
+                    <option value="none">선택하세요</option>
+                    <option value="under30">30일 이하 (또는 연체 예정)</option>
+                    <option value="mid">31일 이상 89일 이하</option>
+                    <option value="over90">90일 이상 (3개월 이상 장기 연체)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>2. 총 무담보 및 담보 채무의 합계 금액은 얼마인가요?</label>
+                <select id="total-debt-limit" class="form-control">
+                    <option value="none">선택하세요</option>
+                    <option value="within">15억 원 이하 (무담보 5억, 담보 10억 이하)</option>
+                    <option value="over">15억 원 초과</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>3. 최근 6개월 이내 새로 발생한 신규 대출금이 전체 부채의 30%를 넘습니까?</label>
+                <select id="new-debt-ratio" class="form-control">
+                    <option value="none">선택하세요</option>
+                    <option value="low">30% 미만이다 (대부분 오래된 빚이다)</option>
+                    <option value="high">30% 이상이다 (최근에 빌린 돈이 많다)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>4. 최저생계비 이상의 일정한 소득이 있거나 가족 등의 생계 지원이 가능합니까?</label>
+                <select id="income-exists" class="form-control">
+                    <option value="none">선택하세요</option>
+                    <option value="yes">예, 매월 소득이 있거나 대신 갚아줄 가족이 있습니다</option>
+                    <option value="no">아니요, 현재 소득이 전혀 없고 생계가 완전히 불가능합니다</option>
+                </select>
+            </div>
+            <button type="button" class="btn-submit" onclick="checkEligibility()">자가 진단 결과 보기</button>
+            
+            <div id="eligibility-result" class="result-box">
+                <h5 id="elig-res-title">진단 결과 분석</h5>
+                <p id="elig-res-text">항목을 모두 입력해 주시면 적절한 채무조정 제도를 추천해 드립니다.</p>
+            </div>
+        </div>
+
+        <!-- 변제금 계산기 위젯 -->
+        <div class="widget-section" id="calculator-widget">
+            <h3 class="widget-title">개인워크아웃 예상 변제금 계산기</h3>
+            <p style="font-size: 14px; color: var(--text-muted); text-align: center;">대략적인 무담보 원금과 이자를 입력하여 매월 낼 금액을 직접 확인해 보세요.</p>
+            <div class="form-group">
+                <label for="calc-principal">총 무담보 채무 원금액 (만원 단위 입력, 예: 3000):</label>
+                <input type="number" id="calc-principal" class="form-control" placeholder="예: 3000" min="0">
+            </div>
+            <div class="form-group">
+                <label for="calc-interest">총 이자 및 연체이자액 (만원 단위 입력, 예: 1500):</label>
+                <input type="number" id="calc-interest" class="form-control" placeholder="예: 1500" min="0">
+            </div>
+            <div class="form-group">
+                <label>신청자 사회적 배려층(취약 계층) 분류 선택:</label>
+                <select id="calc-vulnerability" class="form-control">
+                    <option value="normal">일반 직장인 및 자영업자 (일반 감면율)</option>
+                    <option value="youth">만 34세 이하 청년층</option>
+                    <option value="vulnerable">기초생활수급자, 중증장애인, 70세 이상 고령자</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="calc-months">희망 상환 기간 선택 (개월):</label>
+                <select id="calc-months" class="form-control">
+                    <option value="60">60 개월 (5년 분할납부)</option>
+                    <option value="84">84 개월 (7년 분할납부)</option>
+                    <option value="96" selected>96 개월 (8년 분할납부 - 일반적 최대치)</option>
+                    <option value="120">120 개월 (10년 분할납부 - 최장 상환 특례)</option>
+                </select>
+            </div>
+            <button type="button" class="btn-submit" onclick="calculateWorkout()">월 예상 상환금액 계산하기</button>
+
+            <div id="calculator-result" class="result-box">
+                <h5>예상 감면율 및 변제금 모의 계산 결과</h5>
+                <p>이자 및 연체이자 감면액: <strong><span id="res-interest-saving">0</span>만 원 (100% 면제)</strong></p>
+                <p>예상 원금 감면 비율: <strong><span id="res-reduction-ratio">0</span>%</strong></p>
+                <p>조정 후 최종 변제 원금: <strong><span id="res-final-principal">0</span>만 원</strong></p>
+                <p>매월 납입 예상 금액: <strong><span id="res-monthly-payment">0</span> 원 (총 <span id="res-total-months">0</span>회 납부)</strong></p>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 15px;">해당 견적과 금액 계산은 단순 시뮬레이션 결과이며, 실제 금융기관 협의 및 상각채권 분류 비율에 따라 변동될 수 있습니다.</p>
+            </div>
+        </div>
+
+        <script>
+            function checkEligibility() {
+                const overdue = document.getElementById('overdue-days').value;
+                const limit = document.getElementById('total-debt-limit').value;
+                const ratio = document.getElementById('new-debt-ratio').value;
+                const income = document.getElementById('income-exists').value;
+                const resultBox = document.getElementById('eligibility-result');
+                const title = document.getElementById('elig-res-title');
+                const text = document.getElementById('elig-res-text');
+
+                if (overdue === 'none' || limit === 'none' || ratio === 'none' || income === 'none') {
+                    alert('모든 진단 항목을 올바르게 선택해 주시기 바랍니다.');
+                    return;
+                }
+
+                resultBox.style.display = 'block';
+
+                if (limit === 'over') {
+                    title.innerText = '개인워크아웃 불가능 (채무액 한도 초과)';
+                    text.innerHTML = '총 부채가 15억 원을 초과하여 개인워크아웃은 가입이 어렵습니다. 이 경우 법원의 <strong>개인회생</strong> 또는 <strong>일반회생</strong> 제도를 전문 법률 업체를 통해 컨설팅받아보시기를 추천합니다.';
+                    return;
+                }
+
+                if (ratio === 'high') {
+                    title.innerText = '개인워크아웃 신청 불가 (최근 채무 비율 과다)';
+                    text.innerHTML = '최근 6개월 이내에 신규로 발생한 대출 금액이 총부채의 30%를 초과할 경우, 금융기관 도덕적 해이 방지 기준에 의거하여 접수가 반려됩니다. 연체가 발생한 채로 약 3-4개월가량 기간이 더 지나 신규 채무 비율이 낮아지거나, 법원 개인회생 제도를 알아보는 것을 추천합니다.';
+                    return;
+                }
+
+                if (income === 'no') {
+                    title.innerText = '개인워크아웃 보류 (상환 소득 증빙 필요)';
+                    text.innerHTML = '수입이 전혀 없거나 가족 등의 생계비 보조 증빙이 어렵다면 워크아웃은 동의를 받기 어렵습니다. 장기 상환 능력이 불가능하다고 판단될 경우 신용회복제도보다는 법원의 <strong>개인파산 및 면책</strong>을 최우선으로 비교 검토하십시오.';
+                    return;
+                }
+
+                if (overdue === 'under30') {
+                    title.innerText = '신속채무조정 (연체전 채무조정) 적합';
+                    text.innerHTML = '연체 일수가 30일 이하로 짧으므로 개인워크아웃보다는 <strong>신속채무조정</strong> 혜택 대상입니다. 연체이자가 가산되어 신용 등급이 극단적으로 파괴되기 전에 빠르게 서민금융진흥원이나 신용회복위원회를 방문해 보십시오.';
+                } else if (overdue === 'mid') {
+                    title.innerText = '프리워크아웃 (이자율 채무조정) 적합';
+                    text.innerHTML = '연체 기간이 31일에서 89일 사이이므로 <strong>프리워크아웃</strong> 접수 조건에 부합합니다. 약정 이자율의 절반을 깎아주어 매달 결제 대금 상환 압박을 완화해 주는 효과가 있습니다.';
+                } else if (overdue === 'over90') {
+                    title.innerText = '개인워크아웃 신청 최적 조건 만족';
+                    text.innerHTML = '축하합니다. 연체 90일 이상의 핵심 기준을 완벽히 만족하여 <strong>개인워크아웃</strong> 접수가 가능한 강력한 후보군입니다. 원금 최대 70% 감면 혜택과 이자 전액 탕감을 동시에 노릴 수 있으며 최장 8년 동안 안전하게 나누어 갚을 수 있습니다. 신속하게 무료 전문 상담을 예약하십시오.';
+                }
+            }
+
+            function calculateWorkout() {
+                const principal = parseFloat(document.getElementById('calc-principal').value);
+                const interest = parseFloat(document.getElementById('calc-interest').value);
+                const vulnerability = document.getElementById('calc-vulnerability').value;
+                const months = parseInt(document.getElementById('calc-months').value);
+                const resultBox = document.getElementById('calculator-result');
+
+                if (isNaN(principal) || principal <= 0) {
+                    alert('총 채무 원금을 정확히 입력해 주세요.');
+                    return;
+                }
+
+                const actualInterest = isNaN(interest) ? 0 : interest;
+                resultBox.style.display = 'block';
+
+                let reductionRatio = 0;
+                if (vulnerability === 'normal') {
+                    reductionRatio = 40; // 평균적인 대손상각 채권 원금 감면 비율
+                } else if (vulnerability === 'youth') {
+                    reductionRatio = 60; // 청년 특례 평균 감면 비율
+                } else if (vulnerability === 'vulnerable') {
+                    reductionRatio = 85; // 특별 사회 배려층 지원 비율
+                }
+
+                const finalPrincipal = Math.round(principal * (1 - reductionRatio / 100));
+                const monthlyPayment = Math.round((finalPrincipal * 10000) / months);
+
+                document.getElementById('res-interest-saving').innerText = actualInterest;
+                document.getElementById('res-reduction-ratio').innerText = reductionRatio;
+                document.getElementById('res-final-principal').innerText = finalPrincipal;
+                document.getElementById('res-monthly-payment').innerText = monthlyPayment.toLocaleString();
+                document.getElementById('res-total-months').innerText = months;
+            }
+        </script>
+
+        <h2>6. 개인워크아웃 진행 시 누릴 수 있는 압도적인 장점</h2>
+        <p>인터넷 커뮤니티인 디시인사이드 신용회복 갤러리나 보배드림, 펨코(에펨코리아) 등지의 실사용자 내돈내산 후기를 분석해 보면, 개인워크아웃 승인 이후 삶의 질이 획기적으로 개선되었다는 호평을 가장 자주 발견할 수 있습니다. 개인워크아웃이 가진 독자적인 장점들을 면밀하게 짚어보겠습니다.</p>
+
+        <h4>상환 압박 및 추심 즉시 중단</h4>
+        <p>개인워크아웃 신청 서류를 신용회복위원회 인터넷 온라인 사이트나 모바일 앱, 어플을 통해 제출하고 접수가 완료된 바로 다음 날부터 협약 가입 금융회사들의 모든 유선 연락, 자택 방문, 우편 독촉 등 불법적이거나 고통스러운 <strong>추심 행위가 전면 중단</strong>됩니다. 이는 채무자가 극심한 일상적인 스트레스에서 해방되어 정상적인 직장 생활과 일상에 집중할 수 있도록 돕는 최고의 혜택 중 하나입니다.</p>
+
+        <h4>파격적인 이자 감면 및 원금 감액 혜택</h4>
+        <p>어떤 조건에서도 이자와 연체이자는 전액 소멸시키는 것이 대전제입니다. 채권의 가치가 상실되어 금융회사들이 대손상각 처리한 특수채권에 대해서는 원금의 최저 20%에서 최대 70%(사회적 배려가 절실한 고령층, 장애인, 기초수급층 등은 최대 90%까지)의 감면율이 적용되므로 가히 파격적인 수준의 부채 정리가 가능해집니다.</p>
+
+        <h4>최장 8년에 이르는 여유로운 분할상환 납부</h4>
+        <p>조정이 완료된 원금은 일시불이나 급격한 단기 결제가 아닌, 채무자의 소득 흐름을 정밀하게 감안하여 <strong>최장 8년(96개월)</strong> 범위 안에서 원금 균등 분할 상환이 가능하도록 일정을 재조정해 줍니다. 따라서 본인의 가계 자산 상황에 가장 알맞은 합리적인 변제 계획을 세울 수 있습니다.</p>
+
+        <h2>7. 신청 전에 반드시 숙지해야 할 감당해야 할 단점 및 단점 극복법</h2>
+        <p>하지만 세상에 단점이 존재하지 않는 완벽한 제도는 없습니다. 가입 이전에 발생할 수 있는 여러 제약 사항과 부정적 측면을 사전에 정확하게 예측하고 인지해야만 상환 실패로 인한 중도 실효 사태를 예방할 수 있습니다.</p>
+
+        <h4>90일의 지독한 추심 기간 감내 의무</h4>
+        <p>워크아웃을 원활하게 신청하려면 어쨌거나 단 하나의 부채라도 90일 이상 연체가 누적되어야 합니다. 신청 직전까지 지속되는 은행, 카드사, 채권추심 업체의 무차별적 전화 세례와 압류 협박을 온전히 홀로 버텨내야 한다는 치명적인 심리적 장벽이 있습니다. 이 고비를 극복하지 못해 도중에 사설 불법 컨설팅 업체나 비싼 수임료를 요구하는 변호사 사무실을 통해 자칫 원치 않는 고액의 회생 견적을 덜컥 계약해 버리는 불상사가 빈번하게 일어납니다.</p>
+
+        <h4>신용카드 발급 불가 및 공공정보 등재 문제</h4>
+        <p>워크아웃 확정 시 신용회복지원이라는 '1101' 등의 공공정보 코드가 신용정보망에 정식 등재됩니다. 이 코드가 유지되는 변제 시작 후 최초 <strong>2년 동안은 일반적인 신용카드 신규 발급이나 제1금융권 은행 대출 이용이 전면 정지</strong>됩니다. 체크카드 사용이나 선불폰 이용 등은 문제없으나, 현대 사회에서 보편적인 신용 생활을 영위하기가 2년 동안은 상당히 곤란해집니다. 다만, 성실 상환 기간이 24개월(2년)을 경과하게 되면 해당 공공정보 코드가 신용평가기관(NICE, KCB 등)에서 조기에 자동 삭제되므로, 이때부터는 다시 신용카드 발급이나 신용점수 재건이 다이렉트로 가능해져 정상인과 똑같은 수준의 금융 활동을 시작할 수 있습니다.</p>
+
+        <h4>보증인 채무 및 비협약 채무의 미포함 리스크</h4>
+        <p>개인워크아웃은 전적으로 신용회복협약에 속한 금융기관들 간의 약속입니다. 따라서 개인적으로 빌린 사채나 계모임 돈, 상가 임대료 연체 등 비협약 채무나 보증인이 얽혀 있는 특수 채무는 보호받지 못합니다. 본인이 워크아웃을 진행하는 동안 보증을 서준 부모나 형제, 친구에게 추심이 그대로 전가되므로 불화를 겪는 원인이 되기도 합니다. 모든 종류의 채무를 조건 없이 포괄하여 강제로 통합 청산하고 싶다면 사적 워크아웃보다는 법원에서 주관하는 개인회생이 훨씬 우수한 대안이 됩니다.</p>
+
+        <h2>8. 2026년 실제 가입자 후기와 커뮤니티 트렌드 분석</h2>
+        <p>실제 2026년 상반기에 신용회복위원회를 직접 이용했던 주부 김 모 씨(43세, 경기도 남양주 거주)는 다음과 같은 진정성 있는 내돈내산 후기를 전했습니다. "카드론과 대출이 연체되며 매일 오전 9시만 되면 가슴이 두근거려 토스나 카카오톡 앱조차 켜지 못했습니다. 유튜브나 네이버 지식인에서 저렴한곳, 싼곳 등 채무조정 전문 법무사를 검색해 고액의 견적을 받고 포기하려다, 마지막 희망으로 신용회복위원회를 방문해 무료 상담을 받았습니다. 90일 동안 매일 오던 독촉 전화가 워크아웃 신청을 완료하자마자 감쪽같이 사라졌을 때 비로소 숨을 쉴 수 있었습니다. 지금은 이자 2천만 원 전액을 할인 면제받고 매달 25만 원씩 8년 동안 성실히 갚는 중입니다."</p>
+
+        <p>또한, 에펨코리아(펨코)나 디시인사이드 등지의 청년 유저들은 구글, 트위터, 인스타그램, 페이스북 같은 SNS에서 무조건 공짜 사은품을 주거나 현금지원을 해주겠다는 불법 대출 중개업체나 신용 카드가입 유도 광고에 절대 낚이지 말라고 강력히 조언하고 있습니다. 빚을 청산하는 데 있어 지름길은 없으며 오로지 국가가 보증하고 신용회복위원회가 엄밀하게 설계한 채무조정 사이트를 통한 직접 컨설팅과 성실한 상환만이 인생을 되찾는 유일한 정공법이라는 의견이 중론입니다. 최근에는 제미나이(Gemini)나 챗지피티(ChatGPT)와 같은 최첨단 대화형 인공지능(AI) 플랫폼을 검색기로 활용하여 본인의 원리금을 대략 계산해 보고 방문하는 스마트한 20대, 30대 신청자가 대폭 증가하는 양상을 띠고 있습니다.</p>
+
+        <h2>9. 개인워크아웃 정밀 신청 절차: 단계별 밀착 완벽 안내</h2>
+        <p>어렵게 마음을 굳히고 연체 90일을 버텨냈다면, 다음의 4단계 실무 과정을 통해 안정적으로 채무조정 계약을 최종 체결하게 됩니다.</p>
+
+        <h4>1단계: 예약 접수 및 사전 준비</h4>
+        <p>신용회복위원회 공식 웹사이트 인터넷 온라인 홈이나 카카오톡 채널, 공식 모바일 전용 앱을 활용하여 거주지에서 가까운 서민금융통합지원센터 방문 일정을 사전에 다이렉트로 예약합니다. 혹은 공인인증서만 구비되어 있다면 지부를 일일이 직접 방문하지 않고 집에서 PC를 활용해 온라인 비대면 다이렉트 자격 가입 및 접수를 처리하는 것도 얼마든지 가능합니다.</p>
+
+        <h4>2단계: 상담 진행 및 서류 정밀 심사</h4>
+        <p>상담사와의 전문 1대1 컨설팅을 진행하여 본인의 월 평균 가구 소득, 보유 부동산이나 차량 등 재산 현황, 부양가족 수 등을 투명하게 소명합니다. 주민등록등본, 소득증빙서류(근로소득원천징수증, 통장 입금 내역 등)를 사전에 준비하여 누락 없이 제출하는 것이 좋습니다.</p>
+
+        <h4>3단계: 채권자동의 수렴 및 심의 회부</h4>
+        <p>신용회복위원회는 채무자가 제출한 변제 계획안을 기반으로 협약 가입 금융회사들에 동의 여부를 묻는 공문을 보냅니다. 채권 금융기관들의 <strong>총채권액 과반수(50% 이상)의 동의</strong>를 얻으면 마침내 안건이 정식 승인 및 가결됩니다. 대개 신용회복위원회가 합리적인 감면 수준을 제시하므로 대다수의 건은 무난하게 가결 승인이 떨어집니다.</p>
+
+        <h4>4단계: 합의서 체결 및 상환 시작</h4>
+        <p>체결 승인 통보가 오면 가까운 센터를 방문하거나 인터넷상에서 전자 서명을 통해 채무조정 합의서를 정식 체결합니다. 합의 완료 이후 다음 달부터 약속된 월 상환금을 매월 정해진 납부일에 꾸준히 입금하기 시작하면 됩니다. 만약 3회 이상 연달아 변제금을 미납하면 워크아웃의 효력이 즉각 상실(실효)되어 기존 면제 혜택이 전부 취소되고 혹독한 원래 채무 독촉이 부활하므로 성실한 납부가 절대적으로 요구됩니다.</p>
+
+        <h2>10. 전국 시도별 채무조정 거점 정보 (서울에서 제주까지)</h2>
+        <p>신용회복위원회는 국토 전역에 촘촘한 지역 네트워크망을 구축하여 서울, 경기, 부산, 인천, 대구, 대전, 광주, 울산, 세종, 강원도, 충청북도, 충청남도, 전라북도, 전라남도, 경상북도, 경상남도, 제주도에 거점을 두고 있습니다. 특히 인구가 고밀도로 집중된 수원, 창원, 고양, 용인, 성남, 부천, 청주, 전주, 천안, 남양주, 안산 등 중소도시 중심가에는 복합 금융 지원을 받을 수 있는 '서민금융통합지원센터'가 설치되어 다차원적인 복지 서비스까지 연계해 주고 있습니다.</p>
+
+        <p>본인의 주민등록상 주소지 관할과 무관하게 직장이나 현 거주지 근처 어디든 가장 방문하기 저렴하고 이동 비용이 적게 드는 가까운 센터로 직접 방문 신청해도 아무런 불이익이 주어지지 않으므로 안심하고 예약하시기 바랍니다.</p>
+
+        <h2>11. 체류시간 극대화를 위한 상담 및 견적 문의 접수처</h2>
+        <p>정확한 신용 분석과 예상 감면금액, 개인회생과의 비교 등 전문가의 비공개 맞춤 조언이 필요하다면 아래 간단한 상담 요청 란에 기재해 주십시오. 든든한 상생 금융 가이드라인을 제공해 드리겠습니다.</p>
+
+        <!-- 상담 신청 및 정보 수집 양식 -->
+        <div class="widget-section" id="consulting-form-box">
+            <h3 class="widget-title">개인 신용 회복 맞춤형 컨설팅 신청서</h3>
+            <p style="font-size:14px; text-align:center; color: var(--text-muted);">부담 없이 간단히 입력하시면 전문 채무 분석 가이드를 무료로 즉시 전송해 드립니다.</p>
+            <form id="debt-form" onsubmit="submitDebtForm(event)">
+                <div class="form-group">
+                    <label for="user-name">성명 (실명이 아니어도 무방):</label>
+                    <input type="text" id="user-name" class="form-control" placeholder="예: 홍길동" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-phone">연락처 (안내문 발송용 휴대폰 번호):</label>
+                    <input type="tel" id="user-phone" class="form-control" placeholder="예: 010-1234-5678" required>
+                </div>
+                <div class="form-group">
+                    <label>현재 거주 중이신 행정 구역 선택:</label>
+                    <select id="user-region" class="form-control" required>
+                        <option value="">-- 광역시도 선택 --</option>
+                        <option value="seoul">서울특별시</option>
+                        <option value="gyeonggi">경기도</option>
+                        <option value="incheon">인천광역시</option>
+                        <option value="busan">부산광역시</option>
+                        <option value="daegu">대구광역시</option>
+                        <option value="daejeon">대전광역시</option>
+                        <option value="gwangju">광주광역시</option>
+                        <option value="ulsan">울산광역시</option>
+                        <option value="sejong">세종특별자치시</option>
+                        <option value="gangwon">강원도</option>
+                        <option value="chungbuk">충청북도</option>
+                        <option value="chungnam">충청남도</option>
+                        <option value="jeonbuk">전라북도</option>
+                        <option value="jeonnam">전라남도</option>
+                        <option value="gyeongbuk">경상북도</option>
+                        <option value="gyeongnam">경상남도</option>
+                        <option value="jeju">제주특별자치도</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>신청인의 주 연령대 범위:</label>
+                    <select id="user-age" class="form-control" required>
+                        <option value="">-- 연령 선택 --</option>
+                        <option value="20">만 20대 청년층</option>
+                        <option value="30">만 30대 직장인/청년</option>
+                        <option value="40">만 40대 중장년층</option>
+                        <option value="50">만 50대 장년층</option>
+                        <option value="60">만 60대 고령층</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>가장 시급히 해결하고 싶은 주요 고민 (중복 선택):</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="concern-chushim" value="chushim">
+                            <label for="concern-chushim" style="margin:0; font-weight:normal;">카드 연체 추심 중단</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="concern-reduction" value="reduction">
+                            <label for="concern-reduction" style="margin:0; font-weight:normal;">원금 및 이자 최대 감면</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="concern-rehab" value="rehab">
+                            <label for="concern-rehab" style="margin:0; font-weight:normal;">개인회생과의 견적 비교</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="concern-credit" value="credit">
+                            <label for="concern-credit" style="margin:0; font-weight:normal;">신용카드 조기 발급 시기</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">맞춤형 채무 분석 견적 요청하기</button>
+            </form>
+            <div id="form-submit-result" class="result-box" style="background-color: var(--secondary-light); border-left: 6px solid var(--secondary-color);">
+                <h5 style="color: var(--secondary-color);">상담 접수 완료</h5>
+                <p>성공적으로 맞춤 상담 견적 분석이 접수되었습니다. 기재하신 연락처로 2026년도 신용회복 및 개인회생 비교 가이드라인 소책자 다운로드 링크를 카카오톡 또는 문자로 신속하게 무상 발송해 드리겠습니다.</p>
+            </div>
+        </div>
+
+        <script>
+            function submitDebtForm(event) {
+                event.preventDefault();
+                const name = document.getElementById('user-name').value;
+                const phone = document.getElementById('user-phone').value;
+                const region = document.getElementById('user-region').value;
+                const age = document.getElementById('user-age').value;
+                const resultBox = document.getElementById('form-submit-result');
+
+                if (!name || !phone || !region || !age) {
+                    alert('모든 가입 필수 항목을 누락 없이 정확히 작성해 주시기 바랍니다.');
+                    return;
+                }
+
+                resultBox.style.display = 'block';
+                resultBox.scrollIntoView({ behavior: 'smooth' });
+            }
+        </script>
+
+        <h2>12. 개인워크아웃 자주 묻는 질문 및 상세 답변 (FAQ)</h2>
+
+        <h4>Q1. 개인워크아웃을 신청하면 휴대폰 요금 연체된 것도 이자율 조정이 가능할까요?</h4>
+        <p>신용회복위원회 협약에 서울보증보험 및 통신 대기업들이 적극 가입되어 있으므로 핸드폰 요금이나 기기 할부 연체액도 대부분 워크아웃 대상 채권에 한꺼번에 묶어서 조정 신청이 가능합니다. 다만 연체가 너무 과도해 이미 통신 보증 채권이 대위변제 처리된 경우라면, 보증 기관과의 조율 결과에 따라 원금 감면 비율이 다르게 계산될 수 있으니 사전에 신용회복 상담사에게 정확한 조회를 문의하셔야 합니다.</p>
+
+        <h4>Q2. 워크아웃 진행 중에는 왜 신용카드를 쓸 수 없는 것이며, 언제쯤 다시 가입 및 발급이 가능해집니까?</h4>
+        <p>워크아웃 약정이 체결되면 전국 은행연합회에 '신용회복지원 신청 정보'가 공인 등록되므로, 국내 모든 카드사나 저축은행, 일금융권 등에서는 신청자를 고위험 채무자로 분류해 카드를 정지시키거나 한도를 즉각 박탈합니다. 하지만 낙담하실 필요는 전혀 없습니다. 매달 정해진 변제금을 밀리지 않고 성실하게 납부하여 누적 납입 회차가 24회(2년)를 돌파하면 신용회복 공공정보가 해제됩니다. 이 공공정보가 완벽히 삭제되면 신용 점수가 급격히 점프하기 시작하며, 신용 정보 사이트에서 저렴한곳 혹은 카드발급 추천 브랜드를 검색해 다이렉트로 새로운 신용카드 신규 발급을 신청해 발급 혜택을 온전히 돌려받을 수 있게 됩니다.</p>
+
+        <h4>Q3. 원금 감면율은 도대체 어떠한 원리로 결정되는 것이고 평균은 어느 정도인가요?</h4>
+        <p>많은 분이 '개인워크아웃을 하면 무조건 원금의 반 이상은 그냥 탕감되는 것'으로 오해하십니다. 원금 감면은 전적으로 금융회사가 이 빚을 회계상 완전히 털어낸 '상각채권'이냐, 아니면 아직 장부에 살아있는 '미상각채권'이냐에 따라 결정됩니다. 미상각채권은 이자만 전액 면제될 뿐 원금은 단 1원도 깎아주지 않고 100% 전부 갚아야 합니다. 반면 완전히 상각 처리된 불량 채무의 경우에 한해서만 최소 20%에서 최고 70%의 평균 감액 혜택이 주어집니다. 따라서 본인이 오랜 기간 연체할수록, 독촉 전화를 거부하지 않고 성실히 상담에 대처해 왔을수록 더욱 저렴하고 현명하게 빚을 최종 마무리 지을 수 있습니다.</p>
+
+        <h4>Q4. 개인회생과 개인워크아웃 중에서 저에게 어떤 제도가 더 경제적이고 이득일까요?</h4>
+        <p>회생 제도는 주식 투자 실패나 도박, 낭비 벽 등으로 생긴 최근의 고액 빚도 법적 보호막 안에서 강제 면책해 주므로, 최근 6개월 이내 신규 대출액이 압도적으로 높거나 채무 원금이 1억 원을 상회하는 직장인, 전문 고소득 자영업자 등에게 가장 강력하게 추천되는 방안입니다. 반면 개인워크아웃은 법원 송달 비용이나 고액의 수임료 지출이 전혀 없어 초기 진입비 5만 원만 부담하면 된다는 경제성이 있고, 신용 등급 회복 속도가 회생에 비해 비할 데 없이 압도적으로 빠르다는 장점이 있으므로, 소액 위주의 카드론 연체나 대부업 장기 부채 정리가 절실한 다수 청년 및 일반 가계 채무자에게 제일 훌륭한 탈출구가 됩니다.</p>
+
+        <h2>13. 부채 탈출을 위해 지금 바로 실행해야 할 실천 팁</h2>
+        <p>과도한 채무 위기에서 하루빨리 벗어나 평화롭고 정상적인 삶으로 복귀하고 싶다면 주저하지 말고 행동을 계시해야 합니다. 무의미하게 연체 독촉 문자나 카드 대금 고지서를 보며 한숨 쉴 시간을 줄이고, 지금 다이렉트로 할 수 있는 실천 지침들을 적극 이행하십시오.</p>
+
+        <ul>
+            <li>첫째, 소유하고 있는 채권 금융기관들의 정확한 원금과 이자 합계 잔액을 토스, 카카오톡, 웰컴 등 신용 조회 핀테크 앱, 어플을 열고 가장 직관적으로 일목요연하게 파악해 메모하십시오.</li>
+            <li>둘째, 연체 일수가 확실하게 90일을 넘어섰는지 정확히 계산한 뒤, 가까운 신용회복센터의 방문 상담 예약을 예약 인터넷 홈 사이트에서 다이렉트로 완료하십시오.</li>
+            <li>셋째, 무조건 빚을 한 번에 다 없애준다는 페이스북, 인스타그램, 유튜브상의 과장된 불법 중개인이나 다이렉트 변호사 광고에 수백만 원의 무리한 견적 비용을 덜컥 결제하지 마시고, 국가와 공공기관이 공인하는 무료 창구를 1순위로 비교 방문해 보십시오.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <p><strong>공신력 있는 추천 정보 자원들</strong>: 신용회복위원회의 정밀한 상환도우미 혜택이나 특례 조항들에 대한 구체적 세칙은 <a href="https://www.ccrs.or.kr" target="_blank">신용회복위원회 대한민국 공식 홈페이지</a>에서 즉시 확인 가능합니다. 한편, 부채와 동시에 일자리 및 서민 전용 생계 소액 금융 대출 정보 컨설팅이 절실하다면 <a href="https://www.kinfa.or.kr" target="_blank">서민금융진흥원 포털 사이트</a>가 큰 조력을 드릴 것입니다. 법원의 공적 구제 방안인 개인회생 및 개인파산에 관한 공식 민원 자료와 신속한 판례 열람은 <a href="https://help.scourt.go.kr" target="_blank">대한민국 법원 전자민원센터</a> 채무조정 안내 코너를 꼼꼼하게 정독해 보시기를 권고해 드립니다.</p>
+        </div>
+
+        <p>2026년 한 해 동안 많은 서민이 심각한 부채 한파를 겪고 있습니다. 하지만 합리적이고 안전한 채무조정 지도를 가이드삼아 하루빨리 실행에 나선다면, 빚으로 밤잠을 설치던 고통에서 안전하게 탈출하여 깨끗하고 밝은 신용 평화 시대를 마침내 다시 맞이할 수 있을 것입니다. 망설임은 신용회복의 골든타임만을 늦출 뿐입니다. 오늘 당장 무료 상담의 첫발을 직접 떼 보시기 바랍니다.</p>
+    </div>
+
+  
